@@ -30,7 +30,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/anac_lakehouse"]
+packages = ["src"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = "anac_lakehouse"
 
 [tool.ruff]
 line-length = 120

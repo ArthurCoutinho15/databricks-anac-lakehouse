@@ -10,7 +10,7 @@ resources:
             entry_point: ingest_vra
             parameters:
               - ${var.catalog}
-              - "2023/01 - Janeiro/"
+              - "2023"
       environments:
         - environment_key: default
           spec:

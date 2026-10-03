@@ -67,7 +67,7 @@ class AnacVraBaseClient:
             return "unparsed"
         year = match.group("year")
         month = int(match.group("month"))
-        return f"ano={year}/mes={month:02d}"
+        return f"{year}/{month:02d}"
 
     def download_file(self, file_url: str, dest_dir: Path, overwrite: bool = False) -> Path:
         """Baixa um arquivo para dest_dir/ano=YYYY/mes=MM/, em streaming. Idempotente: pula se já existir."""
