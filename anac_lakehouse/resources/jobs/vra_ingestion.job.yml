@@ -1,0 +1,19 @@
+resources:
+  jobs:
+    vra_ingestion_job:
+      name: vra_ingestion_job
+      tasks:
+        - task_key: ingest_vra
+          environment_key: default
+          python_wheel_task:
+            package_name: anac_lakehouse
+            entry_point: ingest_vra
+            parameters:
+              - ${var.catalog}
+              - "2023/01 - Janeiro/"
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
+            dependencies:
+              - ../../dist/*.whl

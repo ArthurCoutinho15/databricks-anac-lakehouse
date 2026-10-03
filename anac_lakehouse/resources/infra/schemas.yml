@@ -1,0 +1,25 @@
+resources:
+  schemas:
+    landing:
+      catalog_name: ${var.catalog}
+      name: landing
+      comment: "Landing Schema"
+    
+    systems:
+      catalog_name: ${var.catalog}
+      name: system
+    
+    bronze:
+        catalog_name: ${var.catalog}
+        name: bronze
+        comment: "Bronze schema for raw data"
+    
+    silver:
+      catalog_name: ${var.catalog}
+      name: silver
+      comment: "Silver schema for cleaned data"
+    
+    gold:
+      catalog_name: ${var.catalog}
+      name: gold
+      comment: "Gold schema for aggregated data"

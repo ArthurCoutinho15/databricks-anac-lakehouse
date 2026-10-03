@@ -1,0 +1,14 @@
+resources:
+  volumes:
+    landing-volume:
+      catalog_name: ${var.catalog}
+      schema_name: landing
+      name: landing
+
+    checkpoints-volume:
+      catalog_name: ${var.catalog}
+      schema_name: system
+      name: checkpoints
+
+        
+    
