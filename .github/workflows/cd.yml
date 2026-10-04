@@ -1,0 +1,35 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+defaults:
+  run:
+    working-directory: e_commerce_lakehouse
+
+# Only one deploy should ever run at a time against prod.
+concurrency:
+  group: cd-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy bundle (prod target)
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - uses: databricks/setup-cli@main
+
+      - name: Deploy bundle
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: databricks bundle deploy --target prod
