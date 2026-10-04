@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    vra_silver_pipeline:
+      name: vra_silver_pipeline
+      catalog: ${var.catalog}
+      schema: silver
+      serverless: true
+      configuration:
+        catalog: ${var.catalog}
+      libraries:
+        - file:
+            path: ../../src/lakehouse/silver/anac_vra_silver.py
