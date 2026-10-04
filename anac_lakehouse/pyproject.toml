@@ -38,6 +38,9 @@ packages = ["src"]
 
 [tool.ruff]
 line-length = 120
+# `spark` is injected into scope by the Lakeflow Declarative Pipelines runtime for
+# pipeline source files (src/lakehouse/**) -- not an actual undefined name.
+builtins = ["spark"]
 
 [tool.uv]
 # The src->anac_lakehouse wheel remap above isn't compatible with hatchling's
