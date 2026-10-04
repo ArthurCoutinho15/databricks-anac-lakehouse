@@ -1,10 +1,9 @@
 import re
 
+from anac_lakehouse.pipelines.models.l2b import LandingToBronzeConfig
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.streaming import StreamingQuery
-
-from anac_lakehouse.pipelines.models.l2b import LandingToBronzeConfig
 
 # Caracteres que o Delta não aceita em nome de coluna: ' ,;{}()\n\t='
 _INVALID_COLUMN_CHARS = re.compile(r"[ ,;{}()\n\t=]+")

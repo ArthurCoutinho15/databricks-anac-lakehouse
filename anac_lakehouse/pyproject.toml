@@ -18,7 +18,7 @@ dev = [
     "pytest",
     "ruff",
     "databricks-dlt",
-    "databricks-connect>=16.4,<16.5",
+    "databricks-connect>=16.4,<16.5; python_version >= '3.12'",
     "ipykernel",
 ]
 
@@ -38,3 +38,9 @@ packages = ["src"]
 
 [tool.ruff]
 line-length = 120
+
+[tool.uv]
+# The src->anac_lakehouse wheel remap above isn't compatible with hatchling's
+# editable-install mode, and the code only ever runs inside Databricks via the
+# built wheel anyway -- so don't try to install this project into the local venv.
+package = false
