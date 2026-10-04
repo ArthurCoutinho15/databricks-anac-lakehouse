@@ -1,6 +1,6 @@
 import logging
 import sys
-from datetime import date
+from datetime import UTC, datetime
 from pathlib import Path
 
 from anac_lakehouse.clients.anac_vra_client import AnacVraBaseClient
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 def vra_ingestion(catalog: str, start_year: int, end_year: int | None = None):
     """Baixa o VRA ano a ano, de start_year até end_year (default: ano atual)."""
     dest_dir = Path(f"/Volumes/{catalog}/{LANDING_SCHEMA}/{LANDING_VOLUME}/vra")
-    end_year = end_year or date.today().year
+    end_year = end_year or datetime.now(tz=UTC).year
     client = AnacVraBaseClient()
 
     for year in range(start_year, end_year + 1):

@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: e_commerce_lakehouse
+    working-directory: anac_lakehouse
 
 jobs:
   lint:
