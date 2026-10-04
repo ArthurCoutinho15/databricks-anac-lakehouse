@@ -1,0 +1,19 @@
+resources:
+  jobs:
+    vra_etl_job:
+      name: vra_etl_job
+      tasks:
+        - task_key: bronze_vra
+          environment_key: default
+          python_wheel_task:
+            package_name: anac_lakehouse
+            entry_point: anac_vra_bronze
+            parameters:
+              - ${var.catalog}
+      
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
+            dependencies:
+              - ../../dist/*.whl
