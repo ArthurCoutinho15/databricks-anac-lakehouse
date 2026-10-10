@@ -1,0 +1,51 @@
+[project]
+name = "anac_lakehouse"
+version = "0.0.1"
+authors = [{ name = "arthurtelescoutinho@gmail.com" }]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    # Any dependencies for jobs and pipelines in this project can be added here
+    # See also https://docs.databricks.com/dev-tools/bundles/library-dependencies
+    #
+    # LIMITATION: for pipelines, dependencies are cached during development;
+    # add dependencies to the 'environment' section of your pipeline.yml file instead
+    "requests",
+    "beautifulsoup4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "databricks-dlt",
+    "databricks-connect>=16.4,<16.5; python_version >= '3.12'",
+    "ipykernel",
+]
+
+[project.scripts]
+ingest_vra = "anac_lakehouse.lakehouse.landing.anac_vra_ingestion:main"
+anac_vra_bronze = "anac_lakehouse.lakehouse.bronze.anac_vra_bronze:main"
+ingest_our_airports = "anac_lakehouse.lakehouse.landing.our_airports_ingestion:main"
+ourairports_bronze = "anac_lakehouse.lakehouse.bronze.our_airports_bronze:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = "anac_lakehouse"
+
+[tool.ruff]
+line-length = 120
+# `spark` is injected into scope by the Lakeflow Declarative Pipelines runtime for
+# pipeline source files (src/lakehouse/**) -- not an actual undefined name.
+builtins = ["spark"]
+
+[tool.uv]
+# The src->anac_lakehouse wheel remap above isn't compatible with hatchling's
+# editable-install mode, and the code only ever runs inside Databricks via the
+# built wheel anyway -- so don't try to install this project into the local venv.
+package = false
