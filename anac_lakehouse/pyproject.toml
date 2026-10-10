@@ -27,6 +27,7 @@ ingest_vra = "anac_lakehouse.lakehouse.landing.anac_vra_ingestion:main"
 anac_vra_bronze = "anac_lakehouse.lakehouse.bronze.anac_vra_bronze:main"
 ingest_our_airports = "anac_lakehouse.lakehouse.landing.our_airports_ingestion:main"
 ourairports_bronze = "anac_lakehouse.lakehouse.bronze.our_airports_bronze:main"
+ingest_open_meteo = "anac_lakehouse.lakehouse.landing.open_meteo_ingestion:main"
 
 [build-system]
 requires = ["hatchling"]
