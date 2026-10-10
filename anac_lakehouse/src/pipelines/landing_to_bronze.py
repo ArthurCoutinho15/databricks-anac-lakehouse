@@ -55,6 +55,8 @@ class LandingToBronze:
 
     @staticmethod
     def _sanitize_column_name(name: str) -> str:
+        if name.startswith("_"):
+            return name
         return _INVALID_COLUMN_CHARS.sub("_", name.strip()).strip("_").lower()
 
     @staticmethod
