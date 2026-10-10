@@ -54,7 +54,6 @@ def _read_data_and_standardize() -> DataFrame:
 
     df = df.withColumn("servico_regular", F.col("servico_regular") == F.lit("yes"))
 
-
     window = Window.partitionBy("id_aeroporto").orderBy(F.col("dt").desc())
     df = df.withColumn("_dedup_rank", F.row_number().over(window)).filter(F.col("_dedup_rank") == 1)
 
