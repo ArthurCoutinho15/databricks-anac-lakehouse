@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    open_meteo_silver_pipeline:
+      name: open_meteo_silver_pipeline
+      catalog: ${var.catalog}
+      schema: silver
+      serverless: true
+      configuration:
+        catalog: ${var.catalog}
+      libraries:
+        - file:
+            path: ../../src/lakehouse/silver/open_meteo_silver.py
