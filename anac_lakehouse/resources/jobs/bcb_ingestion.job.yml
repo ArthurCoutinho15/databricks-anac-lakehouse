@@ -1,0 +1,18 @@
+resources:
+  jobs:
+    bcb_ingestion_job:
+      name: bcb_ingestion_job
+      tasks:
+        - task_key: ingest_bcb
+          environment_key: default
+          python_wheel_task:
+            package_name: anac_lakehouse
+            entry_point: ingest_bcb
+            parameters:
+              - ${var.catalog}
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
+            dependencies:
+              - ../../dist/*.whl
