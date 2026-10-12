@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    bcb_silver_pipeline:
+      name: bcb_silver_pipeline
+      catalog: ${var.catalog}
+      schema: silver
+      serverless: true
+      configuration:
+        catalog: ${var.catalog}
+      libraries:
+        - file:
+            path: ../../src/lakehouse/silver/bcb_silver.py
