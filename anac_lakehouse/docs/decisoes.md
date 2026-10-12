@@ -1,0 +1,6 @@
+# Decisões técnicas (ADRs)
+
+| # | Data | Decisão | Motivo |
+|---|------|---------|--------|
+| 001 | 2026-10-12 | Client da ANP (preço do QAV) usa uma URL fixa (edição 2025, tabela 3.26) em vez de descobrir a edição/tabela automaticamente ano a ano. | Tentei automatizar a descoberta (varrer páginas de edição + varrer CSVs por conteúdo do header) e dois problemas apareceram: (1) a URL da página de cada edição alterna entre `anuario-estatistico-{ano}-dados-abertos` e `anuario-estatistico-{ano}` sem padrão previsível; (2) o *número* da tabela não identifica o mesmo conteúdo entre edições — na edição 2026 a tabela 3-26 é "preço médio do óleo combustível A1", não QAV, e a tabela de QAV daquela posição simplesmente não existe mais nessa edição. Até a busca por conteúdo do header falhou na primeira tentativa: o termo "QUEROSENE DE AVIA" bate em duas tabelas diferentes por edição (preço ao consumidor por município — a que queremos — e preço médio de produtores/importadores por região), e o scanner pegou a errada. Dado que essa fonte alimenta só uma pergunta de negócio do desafio (relação QAV x cancelamentos) e já é inerentemente grosseira (11 municípios, granularidade anual), o custo de um discovery robusto não compensa — é mais simples fixar a URL confirmada manualmente e documentar que precisa de revisão manual quando a próxima edição cobrir anos novos. |
+

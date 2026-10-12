@@ -31,6 +31,7 @@ ingest_open_meteo = "anac_lakehouse.lakehouse.landing.open_meteo_ingestion:main"
 open_meteo_bronze = "anac_lakehouse.lakehouse.bronze.open_meteo_bronze:main"
 ingest_bcb = "anac_lakehouse.lakehouse.landing.bcb_ingestion:main"
 bcb_bronze = "anac_lakehouse.lakehouse.bronze.bcb_bronze:main"
+ingest_anp = "anac_lakehouse.lakehouse.landing.anp_ingestion:main"
 
 [build-system]
 requires = ["hatchling"]

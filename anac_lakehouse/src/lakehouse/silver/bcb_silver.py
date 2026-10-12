@@ -36,8 +36,12 @@ def _read_and_standardize() -> DataFrame:
 
     df = df.drop("_metadata", "_row_hash")
 
-    # Dedup incremental streaming-compatível, mesmo padrão da VRA/Open-Meteo.
-    df = df.withWatermark("data", "30 days").dropDuplicatesWithinWatermark(_BUSINESS_KEY)
+    # withWatermark exige coluna TIMESTAMP -- "data" é DATE de propósito (sem hora,
+    # condizente com a granularidade diária/mensal da fonte), então watermarka numa
+    # coluna auxiliar e descarta ela depois.
+    df = df.withColumn("_data_ts", F.col("data").cast("timestamp"))
+    df = df.withWatermark("_data_ts", "30 days").dropDuplicatesWithinWatermark(_BUSINESS_KEY)
+    df = df.drop("_data_ts")
 
     return df
 
